@@ -1,0 +1,54 @@
+{
+  "view": "View",
+  "tabs": [
+    {
+      "value": "View",
+      "content": "#view",
+      "isActive": true
+    },
+    {
+      "value": "Add",
+      "content": "#add",
+      "isActive": false
+    }
+  ],
+  "categories": {
+    "title": "Sort by category:",
+    "options": [
+      {
+        "value": "Wife",
+        "id": "sort-wife"
+      },
+      {
+        "value": "Girlfriend",
+        "id": "sort-girlfriend"
+      },
+      {
+        "value": "All",
+        "id": "sort-reset"
+      }
+    ]
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search by title"
+  },
+  "date": "Date on",
+  "thumbnail": {
+    "buttons": {
+      "view": "View",
+      "edit": "Edit"
+    }
+  },
+  "labels": {
+    "category": "Category",
+    "title": "Title",
+    "description": "Description",
+    "image": "Image",
+    "addImage": "Add new image"
+  },
+  "buttons": {
+    "save": "Save",
+    "submit": "Submit"
+  }
+}

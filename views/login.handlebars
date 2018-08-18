@@ -1,0 +1,11 @@
+<div id="app">
+    <section class="container">
+        <form id="login" class="form" method="POST" action="/login">
+            <label for="username">{{ content.labels.username }}</label>
+            <input name="username" id="username" type="text">
+            <label for="password">{{ content.labels.password }}</label>
+            <input name="password" id="password" type="password">
+            <button type="submit">{{ content.loginButton }}</button>
+        </form>
+    </section>
+</div>

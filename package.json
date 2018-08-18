@@ -1,0 +1,33 @@
+{
+  "name": "sssf-weekly-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "supervisor server.js",
+    "watch": "gulp"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "acl": "^0.4.11",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "eslint": "^5.3.0",
+    "eslint-config-google": "^0.9.1",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^4.0.1",
+    "helmet": "^3.13.0",
+    "moment": "^2.22.1",
+    "mongoose": "^5.2.4",
+    "multer": "^1.3.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "sharp": "^0.20.5",
+    "socket.io": "^2.1.1",
+    "uuid": "^3.3.2"
+  }
+}

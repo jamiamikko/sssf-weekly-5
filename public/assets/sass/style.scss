@@ -1,0 +1,251 @@
+$green: #088da5;
+$white: white;
+$black: black;
+$grey: #ccc;
+
+%container-base {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid $grey;
+  padding: 1rem;
+  height: auto;
+
+  &:after {
+    content: ' ';
+    display: block;
+    clear: both;
+  }
+}
+
+%input-base {
+  clear: both;
+  display: block;
+  margin-bottom: 2rem;
+  min-height: 2rem;
+  width: 100%;
+}
+
+%g-half {
+  width: 49%;
+  float: left;
+  list-style-type: none;
+  margin-bottom: 1rem;
+
+  &:not(:nth-child(3n)) {
+    margin-right: 1%;
+  }
+
+  @media only screen and (max-width: 700px) {
+    width: 100%;
+    float: none;
+  }
+}
+
+%g-third {
+  width: 32%;
+  float: left;
+  list-style-type: none;
+  margin-bottom: 1rem;
+
+  &:not(:nth-child(3n)) {
+    margin-right: 1%;
+  }
+
+  @media only screen and (max-width: 700px) {
+    width: 100%;
+    float: none;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $green;
+}
+
+#app {
+  margin: auto;
+  max-width: 80rem;
+  height: 100%;
+  background-color: $white;
+
+  &:after {
+    content: ' ';
+    display: block;
+    clear: both;
+  }
+}
+
+.button {
+  background-color: $green;
+  color: $white;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  border: 0;
+
+  &:hover {
+    background-color: $white;
+    color: $green;
+    text-decoration: underline;
+  }
+}
+
+.user {
+  padding: 1rem;
+
+  &__name {
+  }
+}
+
+.thumbnail {
+  @extend %g-third;
+
+  &__list {
+    height: auto;
+    clear: both;
+    margin: 2rem 0 0;
+
+    @media only screen and (max-width: 700px) {
+      padding: 0;
+    }
+  }
+
+  &__title {
+    font-size: 1.5rem;
+  }
+
+  &__delete {
+    float: right;
+    background: none;
+    border: none;
+    color: $green;
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &::before {
+      content: 'X';
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.container {
+  @extend %container-base;
+
+  &--half {
+    @extend %g-half;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.modal {
+  visibility: hidden;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.5);
+
+  &__inner {
+    width: auto;
+    max-width: 70rem;
+    background-color: $white;
+    border: 1px solid $black;
+    padding: 2rem;
+
+    position: relative;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    float: right;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &::before {
+      content: 'X';
+    }
+  }
+
+  &__image {
+    margin-bottom: 3rem;
+  }
+}
+
+#map {
+  height: 16rem;
+  width: auto;
+}
+
+.tabs {
+  @extend %container-base;
+  padding: 1rem 1rem 0 1rem;
+
+  .tab {
+    padding: inherit;
+    color: $green;
+    text-decoration: none;
+    cursor: pointer;
+
+    &.active {
+      border-top: 1px solid $grey;
+      border-left: 1px solid $grey;
+      border-right: 1px solid $grey;
+      color: $black;
+      background: $grey;
+    }
+  }
+}
+
+.tab {
+  &__content {
+    display: none;
+
+    &.open {
+      display: block;
+    }
+  }
+}
+
+.form {
+  label {
+    margin-bottom: 0.5rem;
+    clear: both;
+    display: block;
+  }
+  input,
+  textarea {
+    @extend %input-base;
+
+    &.half {
+      width: 50%;
+    }
+  }
+}
+
+.chat {
+  &__wrapper {
+    video {
+      height: 10rem;
+      width: auto;
+    }
+  }
+}

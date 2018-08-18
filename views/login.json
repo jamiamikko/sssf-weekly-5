@@ -1,0 +1,7 @@
+{
+  "labels": {
+    "username": "Username",
+    "password": "Password"
+  },
+  "loginButton": "Login"
+}

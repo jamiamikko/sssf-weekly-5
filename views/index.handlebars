@@ -1,0 +1,118 @@
+<div id="app">
+    <section class="user">
+        <span class="user__name">Welcome {{ username }}</span>
+        <div class="chat__wrapper">
+            <video id="localVideo" autoplay></video>
+            <video id="remoteVideo" autoplay></video>
+            <button type="button" id="btnMakeCall">Make Call</button>
+        </div>
+    </section>
+    <section class="tabs">
+        {{#each content.tabs}}
+        <a class="tab{{#if this.isActive}} active{{/if}}" data-content="{{this.content}}">{{ this.value }}</a>
+        {{/each}}
+    </section>
+    <section class="tab__wrapper">
+        <div id="view" class="tab__content open">
+            <section class="container">
+                <div class="container--half">
+                    <h3>{{ content.categories.title }}</h3>
+                    {{#each content.categories.options}}
+                    <button class="button" id="{{this.id}}">{{this.value}}</button>
+                    {{/each}}
+                </div>
+                <div class="container--half">
+                    <h3>{{ content.search.title }}</h3>
+                    <form class="form">
+                        <input type="text" id="search" placeholder="{{ content.search.placeholder }}">
+                    </form>
+                </div>
+            </section>
+            <section class="container">
+                <div>
+                    <button class="button" id="display-date">{{ content.date }}</button>
+                </div>
+                <ul id="thumbnail-list" class="thumbnail__list">
+                </ul>
+            </section>
+            <div class="modal" id="modal">
+            </div>
+            <template id="thumbnail">
+                <li class="thumbnail">
+                    <button class="thumbnail__delete"></button>
+                    <img class="thumbnail__image">
+                    <p class="thumbnail__date hidden"></p>
+                    <p class="thumbnail__title"></p>
+                    <p class="thumbnail__description"></p>
+                    <button class="button thumbnail__view-button">{{ content.thumbnail.buttons.view }}</button>
+                    <button class="button thumbnail__edit-button">{{ content.thumbnail.buttons.edit }}</button>
+                </li>
+            </template>
+            <template id="view-modal">
+                <div class="modal__inner">
+                    <button class="modal__close"></button>
+                    <img class="modal__image">
+                </div>
+            </template>
+            <template id="edit-modal">
+                <div class="modal__inner">
+                    <button class="modal__close"></button>
+                    <form id="edit-image" class="form" enctype="multipart/form-data">
+                        <input id="edit-latitude" type="hidden" name="latitude">
+                        <input id="edit-longitude" type="hidden" name="longitude">
+                        <label for="category">{{ content.labels.category }}</label>
+                        <input class="half" type="text" id="edit-category" name="category">
+                        <label for="title">{{ content.labels.title }}</label>
+                        <input class="half" type="text" id="edit-title" name="title">
+                        <label for="description">{{ content.labels.description }}</label>
+                        <textarea class="half" id="edit-description" name="description"></textarea>
+                        <button class="button" type="submit">{{ content.buttons.save }}</button>
+                    </form>
+                </div>
+            </template>
+            <div id="map"></div>
+        </div>
+        <div id="add" class="tab__content">
+            <section class="container">
+                <h2>{{ content.label.addImage }}</h2>
+                <form id="add-image" class="form" enctype="multipart/form-data">
+                    <input id="add-latitude" type="hidden" name="latitude">
+                    <input id="add-longitude" type="hidden" name="longitude">
+                    <label for="category">{{ content.labels.category }}</label>
+                    <input class="half" type="text" id="add-category" name="category">
+                    <label for="title">{{ content.labels.title }}</label>
+                    <input class="half" type="text" id="add-title" name="title">
+                    <label for="description">{{ content.labels.description }}</label>
+                    <textarea class="half" id="add-description" name="description"></textarea>
+                    <label for="image">{{ content.labels.image }}</label>
+                    <input id="image" name="image" type="file">
+                    <button class="button" type="submit">{{ content.buttons.submit }}</button>
+                </form>
+            </section>
+        </div>
+    </section>
+</div>
+<script>
+    var initMap = () => {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {
+                lat: 60.2219229,
+                lng: 24.8033403,
+            },
+            zoom: 8,
+        });
+
+        marker = new google.maps.Marker({
+            position: {
+                lat: 60.2219229,
+                lng: 24.8033403
+            },
+            map: map,
+            draggable: true
+        });
+    };
+</script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuNv7w4l_Nrraubfn4r0-CV0VjkdWaxcc&callback=initMap"></script>
+<script src="index.js"></script>
+<script src="rtc.js"></script>
