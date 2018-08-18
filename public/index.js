@@ -343,7 +343,17 @@ const filterSearch = (event) => {
 };
 
 const makeNewCall = (socket) => {
-  socket.emit('call', {message: 'Hello'});
+  caller
+    .createOffer()
+    .then((res) => {
+      console.log(res);
+      caller.setLocalDescription(new RTCSessionDescription(res));
+
+      socket.emit('call', {message: JSON.stringify(res)});
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 const init = () => {
@@ -395,14 +405,15 @@ const init = () => {
     false
   );
 
-  socket.on('call', (data) => {
-    console.log(data.message);
+  socket.on('call', (message) => {
+    console.log(message);
 
     socket.emit('answer', {message: 'call answered'});
   });
 
-  socket.on('answer', (data) => {
-    console.log(data.message);
+  socket.on('answer', (message) => {
+    console.log(message);
+    caller.setRemoteDescription(new RTCSessionDescription(JSON.parse(message)));
   });
 };
 

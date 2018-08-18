@@ -72,8 +72,8 @@ const io = socket(server);
 io.on('connection', (socket) => {
   console.log('There is a connection', socket.id);
 
-  socket.on('call', (data) => {
-    socket.broadcast.emit('call', {message: data.message});
+  socket.on('call', (message) => {
+    socket.broadcast.emit('answer', message);
   });
 
   socket.on('answer', (data) => {
