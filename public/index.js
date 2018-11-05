@@ -2,6 +2,7 @@
 
 let orignalArray;
 let filteredArray;
+let socket;
 
 const modal = document.getElementById('modal');
 const sortGirlfriendBtn = document.getElementById('sort-girlfriend');
@@ -346,10 +347,9 @@ const makeNewCall = (socket) => {
   caller
     .createOffer()
     .then((res) => {
-      console.log(res);
       caller.setLocalDescription(new RTCSessionDescription(res));
 
-      socket.emit('call', {message: JSON.stringify(res)});
+      socket.emit('call', JSON.stringify(res));
     })
     .catch((err) => {
       console.log(err);
@@ -395,7 +395,7 @@ const init = () => {
   addImageForm.addEventListener('submit', submitForm, false);
   searchInput.addEventListener('input', filterSearch, false);
 
-  const socket = io.connect('https://localhost:3000');
+  socket = io.connect('https://localhost:3000');
 
   callButton.addEventListener(
     'click',
@@ -406,14 +406,12 @@ const init = () => {
   );
 
   socket.on('call', (message) => {
-    console.log(message);
-
-    socket.emit('answer', {message: 'call answered'});
+    caller.setRemoteDescription(new RTCSessionDescription(JSON.parse(message)));
+    socket.emit('answer', message);
   });
 
-  socket.on('answer', (message) => {
-    console.log(message);
-    caller.setRemoteDescription(new RTCSessionDescription(JSON.parse(message)));
+  socket.on('candidate', (message) => {
+    caller.addIceCandidate(new RTCIceCandidate(JSON.parse(message).candidate));
   });
 };
 

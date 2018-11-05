@@ -73,11 +73,16 @@ io.on('connection', (socket) => {
   console.log('There is a connection', socket.id);
 
   socket.on('call', (message) => {
-    socket.broadcast.emit('answer', message);
+    socket.broadcast.emit('call', message);
   });
 
   socket.on('answer', (data) => {
-    socket.broadcast.emit('answer', {message: data.message});
+    socket.broadcast.emit('answer', data);
+  });
+
+  socket.on('candidate', (message) => {
+    console.log('candidate message recieved!');
+    socket.broadcast.emit('candidate', message);
   });
 });
 

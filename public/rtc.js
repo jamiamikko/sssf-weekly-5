@@ -3,9 +3,20 @@
 const constraints = {audio: false, video: true};
 
 const caller = new RTCPeerConnection();
+
+const onIceCandidate = (evt) => {
+  socket.emit('candidate', JSON.stringify({candidate: evt.candidate}));
+};
+
 caller.onaddstream = (event) => {
   console.log('onaddstream called');
   document.querySelector('#remoteVideo').srcObject = event.stream;
+};
+
+caller.onicecandidate = (evt) => {
+  if (!evt.candidate) return;
+  console.log('onicecandidate called');
+  onIceCandidate(evt);
 };
 
 navigator.mediaDevices
