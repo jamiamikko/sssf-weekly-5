@@ -407,7 +407,11 @@ const init = () => {
 
   socket.on('call', (message) => {
     caller.setRemoteDescription(new RTCSessionDescription(JSON.parse(message)));
-    socket.emit('answer', message);
+
+    caller.createAnswer().then((res) => {
+      caller.setLocalDescription(new RTCSessionDescription(res));
+      socket.emit('answer', JSON.stringify(res));
+    });
   });
 
   socket.on('candidate', (message) => {

@@ -2,7 +2,19 @@
 
 const constraints = {audio: false, video: true};
 
-const caller = new RTCPeerConnection();
+const servers = {
+  iceServers: [
+    {urls: 'stun:stun.services.mozilla.com'},
+    {urls: 'stun:stun.l.google.com:19302'},
+    {
+      urls: 'turn:numb.viagenie.ca',
+      credential: 'password123',
+      username: 'mikkojam@metropolia.fi'
+    }
+  ]
+};
+
+const caller = new RTCPeerConnection(servers);
 
 const onIceCandidate = (evt) => {
   socket.emit('candidate', JSON.stringify({candidate: evt.candidate}));
