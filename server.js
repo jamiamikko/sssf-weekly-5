@@ -62,7 +62,7 @@ const server = https.createServer(options, app).listen(3000);
 
 http
   .createServer((req, res) => {
-    res.writeHead(301, {Location: 'https://localhost:3000' + req.url});
+    res.writeHead(301, {Location: 'https://sssf-weekly-2.paas.datacenter.fi/' + req.url});
     res.end();
   })
   .listen(8080);
@@ -90,7 +90,7 @@ mongoose
   .connect(
     `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${
       process.env.DB_HOST
-    }:${process.env.DB_PORT}/test`,
+    }:${process.env.DB_PORT}/images`,
     {useNewUrlParser: true}
   )
   .then((db) => {})
