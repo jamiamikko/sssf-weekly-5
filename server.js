@@ -62,7 +62,7 @@ const server = https.createServer(options, app).listen(3000);
 
 http
   .createServer((req, res) => {
-    res.writeHead(301, {Location: 'https://sssf-weekly-2.paas.datacenter.fi/' + req.url});
+    res.writeHead(301, {Location: 'http://sssf-weekly-all.paas.datacenter.fi/' + req.url});
     res.end();
   })
   .listen(8080);
