@@ -53,23 +53,37 @@ app.use(express.static(path.join(__dirname, 'public')));
 const sslkey = fs.readFileSync('./config/ssl-key.pem');
 const sslcert = fs.readFileSync('./config/ssl-cert.pem');
 
-const options = {
-  key: sslkey,
-  cert: sslcert
-};
+app.enable('trust proxy');
 
-const server = https
-  .createServer(options, app)
-  .listen(process.env.PORT || 3000);
+app.use((req, res, next) => {
+  if (req.secure) {
+    // request was via https, so do no special handling
+    next();
+  } else {
+    // request was via http, so redirect to https
+    res.redirect('https://' + req.headers.host + req.url);
+  }
+});
 
-http
-  .createServer((req, res) => {
-    res.writeHead(301, {
-      Location: 'https://sssf-weekly-all.paas.datacenter.fi'
-    });
-    res.end();
-  })
-  .listen(8080);
+app.listen(3000);
+
+// const options = {
+//   key: sslkey,
+//   cert: sslcert
+// };
+
+// const server = https
+//   .createServer(options, app)
+//   .listen(process.env.PORT || 3000);
+
+// http
+//   .createServer((req, res) => {
+//     res.writeHead(301, {
+//       Location: 'https://sssf-weekly-all.paas.datacenter.fi'
+//     });
+//     res.end();
+//   })
+//   .listen(8080);
 
 const io = socket(server);
 
