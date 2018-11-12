@@ -58,11 +58,15 @@ const options = {
   cert: sslcert
 };
 
-const server = https.createServer(options, app).listen(3000);
+const server = https
+  .createServer(options, app)
+  .listen(process.env.PORT || 3000);
 
 http
   .createServer((req, res) => {
-    res.writeHead(301, {Location: 'https://sssf-weekly-all.paas.datacenter.fi'});
+    res.writeHead(301, {
+      Location: 'https://sssf-weekly-all.paas.datacenter.fi'
+    });
     res.end();
   })
   .listen(8080);
