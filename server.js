@@ -65,14 +65,20 @@ app.use((req, res, next) => {
   }
 });
 
-// app.listen(3000);
+const port = process.env.PORT || 3000;
+
+const server = app.listen(port, () => {
+  console.log('Listening to port: ' + port);
+});
 
 // const options = {
 //   key: sslkey,
 //   cert: sslcert
 // };
 
-const server = https.createServer(app).listen(process.env.PORT || 3000);
+// const server = https
+//   .createServer(options, app)
+//   .listen(process.env.PORT || 3000);
 
 // http
 //   .createServer((req, res) => {
