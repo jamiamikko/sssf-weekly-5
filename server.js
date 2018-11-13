@@ -65,25 +65,23 @@ app.use((req, res, next) => {
   }
 });
 
-const server = app.listen(3000);
+const options = {
+  key: sslkey,
+  cert: sslcert
+};
 
-// const options = {
-//   key: sslkey,
-//   cert: sslcert
-// };
+const server = https
+  .createServer(options, app)
+  .listen(process.env.PORT || 3000);
 
-// const server = https
-//   .createServer(options, app)
-//   .listen(process.env.PORT || 3000);
-
-// http
-//   .createServer((req, res) => {
-//     res.writeHead(301, {
-//       Location: 'https://sssf-weekly-all.paas.datacenter.fi'
-//     });
-//     res.end();
-//   })
-//   .listen(8080);
+http
+  .createServer((req, res) => {
+    res.writeHead(301, {
+      Location: 'https://sssf-weekly-all.paas.datacenter.fi'
+    });
+    res.end();
+  })
+  .listen(8080);
 
 const io = socket(server);
 
