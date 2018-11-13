@@ -65,13 +65,13 @@ app.use((req, res, next) => {
   }
 });
 
-const options = {
-  key: sslkey,
-  cert: sslcert
-};
+// const options = {
+//   key: sslkey,
+//   cert: sslcert
+// };
 
 const server = https
-  .createServer(options, app)
+  .createServer(app)
   .listen(process.env.PORT || 3000);
 
 http
