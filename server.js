@@ -65,11 +65,7 @@ app.use((req, res, next) => {
   }
 });
 
-const port = process.env.PORT;
-
-const server = app.listen(port, () => {
-  console.log('Listening to port: ' + port);
-});
+app.listen(3000);
 
 // const options = {
 //   key: sslkey,
