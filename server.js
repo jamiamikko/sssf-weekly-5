@@ -89,26 +89,24 @@ app.listen(port, () => {
   console.log('Listening to port' + port);
 });
 
-const server = http.createServer(app);
+// const io = socket(server);
 
-const io = socket(server);
+// io.on('connection', (socket) => {
+//   console.log('There is a connection', socket.id);
 
-io.on('connection', (socket) => {
-  console.log('There is a connection', socket.id);
+//   socket.on('call', (message) => {
+//     socket.broadcast.emit('call', message);
+//   });
 
-  socket.on('call', (message) => {
-    socket.broadcast.emit('call', message);
-  });
+//   socket.on('answer', (data) => {
+//     socket.broadcast.emit('answer', data);
+//   });
 
-  socket.on('answer', (data) => {
-    socket.broadcast.emit('answer', data);
-  });
-
-  socket.on('candidate', (message) => {
-    console.log('candidate message recieved!');
-    socket.broadcast.emit('candidate', message);
-  });
-});
+//   socket.on('candidate', (message) => {
+//     console.log('candidate message recieved!');
+//     socket.broadcast.emit('candidate', message);
+//   });
+// });
 
 mongoose
   .connect(
