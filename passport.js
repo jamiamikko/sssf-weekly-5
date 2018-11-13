@@ -12,6 +12,10 @@ module.exports = (passport) => {
 
   passport.use(
     new LocalStrategy((username, password, done) => {
+      console.log(username);
+      console.log(password);
+
+      console.log('Lets mennään');
       User.findOne({username: username}, (err, data) => {
         if (err) {
           console.log(err);
