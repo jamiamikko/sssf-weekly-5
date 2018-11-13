@@ -89,7 +89,7 @@ app.listen(port, () => {
   console.log('Listening to port' + port);
 });
 
-const server = http.createServer();
+const server = http.createServer(app);
 
 const io = socket(server);
 
