@@ -85,7 +85,7 @@ const sslcert = fs.readFileSync('./config/ssl-cert.pem');
 
 const port = process.env.PORT || 3000;
 
-const server = http.createServer(app).listen(port, () => {
+app.listen(port, () => {
   console.log('Listening to port' + port);
 });
 
