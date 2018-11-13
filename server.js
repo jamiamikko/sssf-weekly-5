@@ -65,7 +65,7 @@ app.use((req, res, next) => {
   }
 });
 
-app.listen(3000);
+const server = app.listen(3000);
 
 // const options = {
 //   key: sslkey,
