@@ -53,17 +53,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 const sslkey = fs.readFileSync('./config/ssl-key.pem');
 const sslcert = fs.readFileSync('./config/ssl-cert.pem');
 
-app.enable('trust proxy');
+// app.enable('trust proxy');
 
-app.use((req, res, next) => {
-  if (req.secure) {
-    // request was via https, so do no special handling
-    next();
-  } else {
-    // request was via http, so redirect to https
-    res.redirect('https://' + req.headers.host + req.url);
-  }
-});
+// app.use((req, res, next) => {
+//   if (req.secure) {
+//     // request was via https, so do no special handling
+//     next();
+//   } else {
+//     // request was via http, so redirect to https
+//     res.redirect('https://' + req.headers.host + req.url);
+//   }
+// });
 
 // const options = {
 //   key: sslkey,
@@ -85,7 +85,7 @@ app.use((req, res, next) => {
 
 const port = process.env.PORT || 3000;
 
-const server = https.createServer(app).listen(port, () => {
+const server = http.createServer(app).listen(port, () => {
   console.log('Listening to port' + port);
 });
 
@@ -110,7 +110,9 @@ io.on('connection', (socket) => {
 
 mongoose
   .connect(
-  `${process.env.MONGODB_URI}/images`,
+    `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${
+      process.env.DB_HOST
+    }:${process.env.DB_PORT}/images`,
     {useNewUrlParser: true}
   )
   .then((db) => {})
