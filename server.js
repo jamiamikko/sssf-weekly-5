@@ -110,9 +110,7 @@ io.on('connection', (socket) => {
 
 mongoose
   .connect(
-    `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${
-      process.env.DB_HOST
-    }:${process.env.DB_PORT}/images`,
+  `${process.env.MONGODB_URI}/images`,
     {useNewUrlParser: true}
   )
   .then((db) => {})
