@@ -103,7 +103,7 @@ const submitEditForm = (event, id) => {
 
   const jsonData = JSON.stringify(data);
 
-  fetch('https://sssf-weekly-5.paas.datacenter.fi/images/' + id, {
+  fetch('https://sssf-weekly-all.paas.datacenter.fi/images/' + id, {
     method: 'POST',
     body: jsonData,
     headers: {
@@ -256,7 +256,7 @@ const submitForm = (event) => {
 
   const formData = new FormData(addImageForm);
 
-  fetch('https://sssf-weekly-5.paas.datacenter.fi/images', {
+  fetch('https://sssf-weekly-all.paas.datacenter.fi/images', {
     method: 'PUT',
     body: formData
   })
@@ -274,7 +274,7 @@ const deleteImage = (event) => {
   const thumbnail = event.target.parentElement;
   const id = thumbnail.getAttribute('id');
 
-  fetch('https://sssf-weekly-5.paas.datacenter.fi/images/' + id, {
+  fetch('https://sssf-weekly-all.paas.datacenter.fi/images/' + id, {
     method: 'DELETE'
   })
     .then((res) => {
@@ -290,7 +290,7 @@ const deleteImage = (event) => {
 
 const getImagesBySearch = (title) =>
   new Promise((resolve, reject) => {
-    fetch('https://sssf-weekly-5.paas.datacenter.fi/images/search?title=' + title)
+    fetch('https://sssf-weekly-all.paas.datacenter.fi/images/search?title=' + title)
       .then((res) => {
         resolve(res.json());
       })
@@ -301,7 +301,7 @@ const getImagesBySearch = (title) =>
 
 const getImagesById = (id) =>
   new Promise((resolve, reject) => {
-    fetch('https://sssf-weekly-5.paas.datacenter.fi/images/' + id)
+    fetch('https://sssf-weekly-all.paas.datacenter.fi/images/' + id)
       .then((res) => {
         resolve(res.json());
       })
@@ -312,7 +312,7 @@ const getImagesById = (id) =>
 
 const getImages = () =>
   new Promise((resolve, reject) => {
-    fetch('https://sssf-weekly-5.paas.datacenter.fi/images')
+    fetch('https://sssf-weekly-all.paas.datacenter.fi/images')
       .then((res) => {
         resolve(res.json());
       })
@@ -395,7 +395,7 @@ const init = () => {
   addImageForm.addEventListener('submit', submitForm, false);
   searchInput.addEventListener('input', filterSearch, false);
 
-  socket = io.connect('https://sssf-weekly-5.paas.datacenter.fi');
+  socket = io.connect('https://sssf-weekly-all.paas.datacenter.fi');
 
   callButton.addEventListener(
     'click',
