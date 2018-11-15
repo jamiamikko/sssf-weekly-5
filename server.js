@@ -55,17 +55,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 const sslkey = fs.readFileSync('./config/ssl-key.pem');
 const sslcert = fs.readFileSync('./config/ssl-cert.pem');
 
-// app.enable('trust proxy');
+app.enable('trust proxy');
 
-// app.use((req, res, next) => {
-//   if (req.secure) {
-//     // request was via https, so do no special handling
-//     next();
-//   } else {
-//     // request was via http, so redirect to https
-//     res.redirect('https://' + req.headers.host + req.url);
-//   }
-// });
+app.use((req, res, next) => {
+  if (req.secure) {
+    // request was via https, so do no special handling
+    next();
+  } else {
+    // request was via http, so redirect to https
+    res.redirect('https://' + req.headers.host + req.url);
+  }
+});
 
 // const options = {
 //   key: sslkey,
