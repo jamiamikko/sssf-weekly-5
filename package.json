@@ -12,6 +12,7 @@
   "dependencies": {
     "acl": "^0.4.11",
     "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
     "dotenv": "^6.0.0",
     "eslint": "^5.3.0",
     "eslint-config-google": "^0.9.1",

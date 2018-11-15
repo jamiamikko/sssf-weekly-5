@@ -10,6 +10,7 @@ const passport = require('passport');
 const handlebars = require('express-handlebars');
 const socket = require('socket.io');
 const helmet = require('helmet');
+const cors = require('cors');
 
 require('./passport')(passport);
 
@@ -43,6 +44,7 @@ app.use(
 );
 
 app.use(helmet());
+app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
 
