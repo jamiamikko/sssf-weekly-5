@@ -17,7 +17,7 @@ const servers = {
 const caller = new RTCPeerConnection(servers);
 
 const onIceCandidate = (evt) => {
-  socket.emit('candidate', JSON.stringify({candidate: evt.candidate}));
+  socket.emit('candidate', JSON.stringify({'candidate': evt.candidate}));
 };
 
 caller.onaddstream = (event) => {

@@ -413,7 +413,7 @@ const init = () => {
     console.log(message);
     socket.emit('answer', 'Call answered');
 
-    // caller.setRemoteDescription(new RTCSessionDescription(JSON.parse(message)));
+    caller.setRemoteDescription(new RTCSessionDescription(JSON.parse(message)));
 
     // caller.createAnswer().then((res) => {
     //   caller.setLocalDescription(new RTCSessionDescription(res));
@@ -422,7 +422,9 @@ const init = () => {
   });
 
   socket.on('candidate', (message) => {
-    caller.addIceCandidate(new RTCIceCandidate(JSON.parse(message).candidate));
+    console.log('Print candidate');
+    console.log(message);
+    // caller.addIceCandidate(new RTCIceCandidate(JSON.parse(message).candidate));
   });
 };
 
