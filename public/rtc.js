@@ -17,12 +17,14 @@ const servers = {
 const caller = new RTCPeerConnection(servers);
 
 const onIceCandidate = (evt) => {
-  socket.emit('candidate', JSON.stringify({'candidate': evt.candidate}));
+  socket.emit('candidate', JSON.stringify({candidate: evt.candidate}));
 };
 
 caller.onaddstream = (event) => {
   console.log('onaddstream called');
-  document.querySelector('#remoteVideo').srcObject = event.stream;
+  document.querySelector('#remoteVideo').src = window.URL.createObjectURL(
+    event.stream
+  );
 };
 
 caller.onicecandidate = (evt) => {
@@ -35,7 +37,7 @@ navigator.mediaDevices
   .getUserMedia(constraints)
   .then((mediaStream) => {
     const video = document.querySelector('#localVideo');
-    video.srcObject = mediaStream;
+    video.src = window.URL.createObjectURL(mediaStream);
 
     caller.addStream(mediaStream);
   })
