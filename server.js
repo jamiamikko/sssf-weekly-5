@@ -85,7 +85,7 @@ io.on('connection', (socket) => {
 
   socket.on('answer', (message) => {
     console.log(message);
-    socket.broadcast.emit('answer', data);
+    socket.broadcast.emit('answer', message);
   });
 
   socket.on('candidate', (message) => {
