@@ -2,7 +2,6 @@
 
 let orignalArray;
 let filteredArray;
-let socket;
 
 const modal = document.getElementById('modal');
 const sortGirlfriendBtn = document.getElementById('sort-girlfriend');
@@ -16,7 +15,6 @@ const addImageForm = document.querySelector('#add-image');
 const inputLatitude = document.querySelector('#add-latitude');
 const inputLongitude = document.querySelector('#add-longitude');
 const searchInput = document.querySelector('#search');
-const callButton = document.querySelector('#btnMakeCall');
 
 const setThumbnails = (array) => {
   thumbnailList.innerHTML = '';
@@ -343,19 +341,6 @@ const filterSearch = (event) => {
   }
 };
 
-const makeNewCall = (socket) => {
-  caller
-    .createOffer()
-    .then((res) => {
-      caller.setLocalDescription(new RTCSessionDescription(res));
-
-      socket.emit('call', JSON.stringify(res));
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
 const init = () => {
   getImages()
     .then((res) => {
@@ -394,33 +379,6 @@ const init = () => {
   displayDateBtn.addEventListener('click', toggleDate, false);
   addImageForm.addEventListener('submit', submitForm, false);
   searchInput.addEventListener('input', filterSearch, false);
-
-  socket = io.connect('https://sssf-weekly-all.paas.datacenter.fi');
-
-  callButton.addEventListener(
-    'click',
-    () => {
-      makeNewCall(socket);
-    },
-    false
-  );
-
-  socket.on('answer', (message) => {
-    console.log(message);
-  });
-
-  socket.on('call', (message) => {
-    console.log(message);
-    socket.emit('answer', 'Call answered');
-
-    caller.setRemoteDescription(new RTCSessionDescription(JSON.parse(message)));
-  });
-
-  socket.on('candidate', (message) => {
-    console.log('Print candidate');
-    console.log(message);
-    caller.addIceCandidate(new RTCIceCandidate(JSON.parse(message).candidate));
-  });
 };
 
 init();

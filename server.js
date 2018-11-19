@@ -78,6 +78,15 @@ const io = socket(server);
 io.on('connection', (socket) => {
   console.log('There is a connection', socket.id);
 
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+
+  socket.on('message', (message) => {
+    console.log(JSON.stringify(message));
+    socket.broadcast.emit('message', 'Server says hello');
+  });
+
   socket.on('call', (message) => {
     console.log(message);
     socket.broadcast.emit('call', message);
