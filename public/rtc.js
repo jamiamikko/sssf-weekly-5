@@ -45,7 +45,7 @@ navigator.mediaDevices
     console.log(err.name + ': ' + err.message);
   });
 
-socket = io.connect('https://sssf-weekly-all.paas.datacenter.fi');
+const socket = io.connect('https://sssf-weekly-all.paas.datacenter.fi');
 
 const makeNewCall = (socket) => {
   caller
