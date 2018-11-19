@@ -407,6 +407,10 @@ const init = () => {
     false
   );
 
+  socket.on('answer', (message) => {
+    console.log(message);
+  });
+
   socket.on('call', (message) => {
     console.log(message);
     socket.emit('answer', 'Call answered');
