@@ -424,7 +424,7 @@ const init = () => {
   socket.on('candidate', (message) => {
     console.log('Print candidate');
     console.log(message);
-    // caller.addIceCandidate(new RTCIceCandidate(JSON.parse(message).candidate));
+    caller.addIceCandidate(new RTCIceCandidate(JSON.parse(message).candidate));
   });
 };
 
