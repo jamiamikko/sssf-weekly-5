@@ -344,16 +344,18 @@ const filterSearch = (event) => {
 };
 
 const makeNewCall = (socket) => {
-  caller
-    .createOffer()
-    .then((res) => {
-      caller.setLocalDescription(new RTCSessionDescription(res));
+  socket.emit('call', 'Hello');
 
-      socket.emit('call', JSON.stringify(res));
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  // caller
+  //   .createOffer()
+  //   .then((res) => {
+  //     caller.setLocalDescription(new RTCSessionDescription(res));
+
+  //     socket.emit('call', JSON.stringify(res));
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
 };
 
 const init = () => {
@@ -406,12 +408,15 @@ const init = () => {
   );
 
   socket.on('call', (message) => {
-    caller.setRemoteDescription(new RTCSessionDescription(JSON.parse(message)));
+    console.log(message);
+    socket.emit('answer', 'Call answered');
 
-    caller.createAnswer().then((res) => {
-      caller.setLocalDescription(new RTCSessionDescription(res));
-      socket.emit('answer', JSON.stringify(res));
-    });
+    // caller.setRemoteDescription(new RTCSessionDescription(JSON.parse(message)));
+
+    // caller.createAnswer().then((res) => {
+    //   caller.setLocalDescription(new RTCSessionDescription(res));
+    //   socket.emit('answer', JSON.stringify(res));
+    // });
   });
 
   socket.on('candidate', (message) => {

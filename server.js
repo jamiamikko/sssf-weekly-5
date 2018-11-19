@@ -67,21 +67,6 @@ app.use((req, res, next) => {
   }
 });
 
-// const options = {
-//   key: sslkey,
-//   cert: sslcert
-// };
-
-
-// http
-//   .createServer((req, res) => {
-//     res.writeHead(301, {
-//       Location: 'https://sssf-weekly-all.paas.datacenter.fi'
-//     });
-//     res.end();
-//   })
-//   .listen(8080);
-
 const port = process.env.PORT || 3000;
 
 const server = app.listen(port, () => {
@@ -94,10 +79,12 @@ io.on('connection', (socket) => {
   console.log('There is a connection', socket.id);
 
   socket.on('call', (message) => {
+    console.log(message);
     socket.broadcast.emit('call', message);
   });
 
-  socket.on('answer', (data) => {
+  socket.on('answer', (message) => {
+    console.log(message);
     socket.broadcast.emit('answer', data);
   });
 
