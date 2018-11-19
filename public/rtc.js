@@ -34,7 +34,7 @@ caller.onicecandidate = (evt) => {
 navigator.mediaDevices
   .getUserMedia(constraints)
   .then((mediaStream) => {
-    const video = document.querySelector('video');
+    const video = document.querySelector('#localVideo');
     video.srcObject = mediaStream;
 
     caller.addStream(mediaStream);
