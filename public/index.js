@@ -344,18 +344,16 @@ const filterSearch = (event) => {
 };
 
 const makeNewCall = (socket) => {
-  socket.emit('call', 'Hello');
+  caller
+    .createOffer()
+    .then((res) => {
+      caller.setLocalDescription(new RTCSessionDescription(res));
 
-  // caller
-  //   .createOffer()
-  //   .then((res) => {
-  //     caller.setLocalDescription(new RTCSessionDescription(res));
-
-  //     socket.emit('call', JSON.stringify(res));
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
+      socket.emit('call', JSON.stringify(res));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 const init = () => {
