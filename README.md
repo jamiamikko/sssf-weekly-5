@@ -4,7 +4,9 @@ Server Side Scripting frameworks weekly exercise 5
 Credentials:
 
 username: mikkoj
-salasana
 
-usernane: user
+password: salasana
+
+username: user
+
 password: password
